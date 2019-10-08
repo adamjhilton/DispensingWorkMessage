@@ -1,4 +1,4 @@
-﻿using DispensingWorkMessage;
+using DispensingWorkMessage;
 using DispensingWorkMessage.WorkOrder;
 using DispensingWorkMessage.WorkRecord;
 using System;
@@ -88,6 +88,7 @@ namespace DispensingWorkOrderRecordTest
     {
      new OrderProductGroup()
      {
+      Identifier = new List<Identifier>() {new Identifier(){ Name = "32%", Number = "00105"} },
       GuaranteedAnalysis = "32-0-0",
       Product = new List<OrderProduct>()
       {
@@ -106,6 +107,7 @@ namespace DispensingWorkOrderRecordTest
 
    if (sampleType == SampleTypes.Blend || sampleType == SampleTypes.Vrt)
    {
+    workOrder.ProductGroup[0].Identifier = new List<Identifier>() { new Identifier() { Name = "28%", Number = "00133" } };
     workOrder.ProductGroup[0].GuaranteedAnalysis = "28-0-0";
     workOrder.ProductGroup[0].Product.Add(new OrderProduct()
     {
@@ -121,6 +123,7 @@ namespace DispensingWorkOrderRecordTest
    {
     workOrder.ProductGroup.Add(new OrderProductGroup()
     {
+     Identifier = new List<Identifier>() { new Identifier() { Name = "Weed Killer 3000", Number = "05573" } },
      GuaranteedAnalysis = "0-0-0 w/ Weed Killer 3000",
      Product = new List<OrderProduct>()
     });
@@ -154,6 +157,7 @@ namespace DispensingWorkOrderRecordTest
     },
     WorkOrderIdentifier = new Identifier() { Number = "000123", Agency = AgencyTypes.AssignedByOriginator },
     WorkOrderCreationDateTime = DateTime.Now,
+    WorkRecordIdentifier = new Identifier() { Number = "9000524", Agency = AgencyTypes.AssignedByOriginator },
     WorkRecordCreationDateTime = DateTime.Now,
     Reference = new List<Reference>()
     {
@@ -169,26 +173,18 @@ namespace DispensingWorkOrderRecordTest
     {
      new RecordProductGroup()
      {
-      GuaranteedAnalysis = "00-28-00",
+      Identifier = new List<Identifier>() {new Identifier(){ Name = "32%", Number = "00105"} },
+      GuaranteedAnalysis = "32-0-0",
       Product = new List<RecordProduct>()
       {
        new RecordProduct()
        {
-        Identifier = new List<Identifier>() {new Identifier(){ Name = "Water", Number = "00023"} },
+        Identifier = new List<Identifier>() {new Identifier(){ Name = "32%", Number = "00054"} },
         IsCarrier = true,
         PhysicalState = PhysicalStates.Liquid,
         Density = new ValueUnit(){ Value = 8.34, Uom = "GE", Agency = AgencyTypes.UN_REC_20 },
-        RequestedQuantity = new ValueUnit(){ Value = 1200, Uom = "GLL", Agency = AgencyTypes.UN_REC_20 },
-        ActualQuantity = new ValueUnit(){ Value = 1250, Uom = "GLL", Agency = AgencyTypes.UN_REC_20 },
-       },
-       new RecordProduct()
-       {
-        Identifier = new List<Identifier>() {new Identifier(){ Name = "28%", Number = "00054"} },
-        IsCarrier = true,
-        PhysicalState = PhysicalStates.Liquid,
-        Density = new ValueUnit(){ Value = 8.34, Uom = "GE", Agency = AgencyTypes.UN_REC_20 },
-        RequestedQuantity = new ValueUnit(){ Value = 500, Uom = "GLL", Agency = AgencyTypes.UN_REC_20 },
-        ActualQuantity = new ValueUnit(){ Value = 525, Uom = "GLL", Agency = AgencyTypes.UN_REC_20 },
+        RequestedQuantity = new ValueUnit(){ Value = 4375, Uom = "GLL", Agency = AgencyTypes.UN_REC_20 },
+        ActualQuantity = new ValueUnit(){ Value = 4405, Uom = "GLL", Agency = AgencyTypes.UN_REC_20 },
        },
       }
      }
@@ -203,6 +199,41 @@ namespace DispensingWorkOrderRecordTest
      }
     },
    };
+
+   if (sampleType == SampleTypes.Blend || sampleType == SampleTypes.Vrt)
+   {
+    workRecord.ProductGroup[0].Identifier = new List<Identifier>() { new Identifier() { Name = "28%", Number = "00133" } };
+    workRecord.ProductGroup[0].GuaranteedAnalysis = "28-0-0";
+    workRecord.ProductGroup[0].Product.Add(new RecordProduct()
+    {
+     Identifier = new List<Identifier>() { new Identifier() { Name = "Water", Number = "00023" } },
+     IsCarrier = true,
+     PhysicalState = PhysicalStates.Liquid,
+     Density = new ValueUnit() { Value = 8.34, Uom = "GE", Agency = AgencyTypes.UN_REC_20 },
+     RequestedQuantity = new ValueUnit() { Value = 625, Uom = "GLL", Agency = AgencyTypes.UN_REC_20 },
+     ActualQuantity = new ValueUnit() { Value = 635, Uom = "GLL", Agency = AgencyTypes.UN_REC_20 },
+    });
+   }
+
+   if (sampleType == SampleTypes.Vrt)
+   {
+    workRecord.ProductGroup.Add(new RecordProductGroup()
+    {
+     Identifier = new List<Identifier>() { new Identifier() { Name = "Weed Killer 3000", Number = "05573" } },
+     GuaranteedAnalysis = "0-0-0 w/ Weed Killer 3000",
+     Product = new List<RecordProduct>()
+    });
+    workRecord.ProductGroup[1].Product.Add(new RecordProduct()
+    {
+     Identifier = new List<Identifier>() { new Identifier() { Name = "Weed Killer 3000", Number = "00057" } },
+     IsCarrier = false,
+     PhysicalState = PhysicalStates.Liquid,
+     Density = new ValueUnit() { Value = 8.34, Uom = "GE", Agency = AgencyTypes.UN_REC_20 },
+     RequestedQuantity = new ValueUnit() { Value = 50, Uom = "GLL", Agency = AgencyTypes.UN_REC_20 },
+     ActualQuantity = new ValueUnit() { Value = 50, Uom = "GLL", Agency = AgencyTypes.UN_REC_20 },
+    });
+   }
+
    return workRecord;
   }
 
@@ -226,7 +257,13 @@ namespace DispensingWorkOrderRecordTest
   /// </summary>
   private static Party CreateStubParty(string name, bool addStuff = false)
   {
-   Party party = new Party() { Identifier = new List<Identifier>() { new Identifier() { Name = name, Agency = AgencyTypes.AssignedByOriginator } } };
+   Party party = new Party()
+   {
+    Identifier = new List<Identifier>() { new Identifier() {
+    Name = name,
+    Agency = AgencyTypes.AssignedByOriginator,
+    Number = "00000",} }
+   };
    if (addStuff)
    {
     party.Address = new List<Address>()
