@@ -1,4 +1,4 @@
-﻿using DispensingWorkMessage.Utilities;
+using DispensingWorkMessage.Utilities;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
@@ -34,16 +34,46 @@ namespace DispensingWorkMessage.WorkOrder
   /////////////////////////////////////////////////////////////////////////////////////////////
 
   /// <summary>
+  /// Serializes this object into a specified JSON file.
+  /// </summary>
+  public void SerializeToFile(string file)
+  { JsonUtilities.SerializeToFile(new List<DispensingWorkOrder>() { this }, file); }
+
+  /// <summary>
+  /// Serializes this object into a specified JSON file.
+  /// </summary>
+  public static void SerializeToFile(List<DispensingWorkOrder> workOrders, string file)
+  { JsonUtilities.SerializeToFile(workOrders, file); }
+
+  /// <summary>
+  /// Serializes this object into a JSON string.
+  /// </summary>
+  public string Serialize()
+  { return JsonUtilities.Serialize(new List<DispensingWorkOrder>() { this }); }
+
+  /// <summary>
+  /// Serializes this object into a JSON string.
+  /// </summary>
+  public static string Serialize(List<DispensingWorkOrder> workOrders)
+  { return JsonUtilities.Serialize(workOrders); }
+
+  /////////////////////////////////////////////////////////////////////////////////////////////
+  #endregion
+
+  #region Deserialization Members
+  /////////////////////////////////////////////////////////////////////////////////////////////
+
+  /// <summary>
   /// Deserializes a specified JSON file into an instance of this class.
   /// </summary>
-  public static DispensingWorkOrder DeserializeFromFile(string filePathAndName)
-  { return JsonUtilities.DeserializeFromFile<DispensingWorkOrder>(filePathAndName); }
+  public static List<DispensingWorkOrder> DeserializeFromFile(string filePathAndName)
+  { return JsonUtilities.DeserializeFromFile<List<DispensingWorkOrder>>(filePathAndName); }
 
   /// <summary>
   /// Deserializes a JSON string into an instance of this class.
   /// </summary>
-  public static DispensingWorkOrder Deserialize(string json)
-  { return JsonUtilities.Deserialize<DispensingWorkOrder>(json); }
+  public static List<DispensingWorkOrder> Deserialize(string json)
+  { return JsonUtilities.Deserialize<List<DispensingWorkOrder>>(json); }
 
   /////////////////////////////////////////////////////////////////////////////////////////////
   #endregion
