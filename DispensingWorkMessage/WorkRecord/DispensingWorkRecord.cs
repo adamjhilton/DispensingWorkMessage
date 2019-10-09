@@ -1,4 +1,4 @@
-﻿using DispensingWorkMessage.Utilities;
+using DispensingWorkMessage.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -50,16 +50,46 @@ namespace DispensingWorkMessage.WorkRecord
   /////////////////////////////////////////////////////////////////////////////////////////////
 
   /// <summary>
+  /// Serializes this object into a specified JSON file.
+  /// </summary>
+  public void SerializeToFile(string file)
+  { JsonUtilities.SerializeToFile(new List<DispensingWorkRecord>() { this }, file); }
+
+  /// <summary>
+  /// Serializes this object into a specified JSON file.
+  /// </summary>
+  public static void SerializeToFile(List<DispensingWorkRecord> workRecords, string file)
+  { JsonUtilities.SerializeToFile(workRecords, file); }
+
+  /// <summary>
+  /// Serializes this object into a JSON string.
+  /// </summary>
+  public string Serialize()
+  { return JsonUtilities.Serialize(new List<DispensingWorkRecord>() { this }); }
+
+  /// <summary>
+  /// Serializes this object into a JSON string.
+  /// </summary>
+  public static string Serialize(List<DispensingWorkRecord> workRecords)
+  { return JsonUtilities.Serialize(workRecords); }
+
+  /////////////////////////////////////////////////////////////////////////////////////////////
+  #endregion
+
+  #region Deserialization Members
+  /////////////////////////////////////////////////////////////////////////////////////////////
+
+  /// <summary>
   /// Deserializes a specified JSON file into an instance of this class.
   /// </summary>
-  public static DispensingWorkRecord DeserializeFromFile(string filePathAndName)
-  { return JsonUtilities.DeserializeFromFile<DispensingWorkRecord>(filePathAndName); }
+  public static List<DispensingWorkRecord> DeserializeFromFile(string filePathAndName)
+  { return JsonUtilities.DeserializeFromFile<List<DispensingWorkRecord>>(filePathAndName); }
 
   /// <summary>
   /// Deserializes a JSON string into an instance of this class.
   /// </summary>
-  public static DispensingWorkRecord Deserialize(string json)
-  { return JsonUtilities.Deserialize<DispensingWorkRecord>(json); }
+  public static List<DispensingWorkRecord> Deserialize(string json)
+  { return JsonUtilities.Deserialize<List<DispensingWorkRecord>>(json); }
 
   /////////////////////////////////////////////////////////////////////////////////////////////
   #endregion
