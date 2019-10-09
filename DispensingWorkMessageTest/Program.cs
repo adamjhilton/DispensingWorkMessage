@@ -23,7 +23,7 @@ namespace DispensingWorkOrderRecordTest
     string inWorkOrderFile = $"inWorkOrder_{sampleType}.json";
     string inWorkOrderPath = Path.Combine(path, inWorkOrderFile);
     Console.WriteLine($"Attempting to read in: '{inWorkOrderFile}'");
-    DispensingWorkOrder workOrder = DispensingWorkOrder.DeserializeFromFile(inWorkOrderPath) ?? CreateStubWorkOrder(sampleType);
+    DispensingWorkOrder workOrder = DispensingWorkOrder.DeserializeFromFile(inWorkOrderPath)?[0] ?? CreateStubWorkOrder(sampleType);
 
     // Write the work order back out.
     string outWorkOrderFile = $"outWorkOrder_{sampleType}.json";
@@ -35,7 +35,7 @@ namespace DispensingWorkOrderRecordTest
     string inWorkRecordPath = Path.Combine(path, inWorkRecordFile);
     Console.WriteLine();
     Console.WriteLine($"Attempting to read in: '{inWorkRecordFile}'");
-    DispensingWorkRecord workRecord = DispensingWorkRecord.DeserializeFromFile(inWorkRecordPath) ?? CreateStubWorkRecord(sampleType);
+    DispensingWorkRecord workRecord = DispensingWorkRecord.DeserializeFromFile(inWorkRecordPath)?[0] ?? CreateStubWorkRecord(sampleType);
 
     // Write the work record back out.
     string outWorkRecordFile = $"outWorkRecord_{sampleType}.json";
