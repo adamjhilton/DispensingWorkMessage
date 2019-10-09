@@ -1,4 +1,3 @@
-﻿using DispensingWorkMessage.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -71,24 +70,6 @@ namespace DispensingWorkMessage
 
   [DataMember(EmitDefaultValue = false)]
   public List<Comment> Comments;
-
-  /////////////////////////////////////////////////////////////////////////////////////////////
-  #endregion
-
-  #region Serialization Members
-  /////////////////////////////////////////////////////////////////////////////////////////////
-
-  /// <summary>
-  /// Serializes this object into a specified JSON file.
-  /// </summary>
-  public void SerializeToFile(string file)
-  { JsonUtilities.SerializeToFile(this, file); }
-
-  /// <summary>
-  /// Serializes this object into a JSON string.
-  /// </summary>
-  public string Serialize()
-  { return JsonUtilities.Serialize(this); }
 
   /////////////////////////////////////////////////////////////////////////////////////////////
   #endregion
