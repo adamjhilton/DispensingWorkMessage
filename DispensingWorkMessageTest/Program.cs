@@ -79,8 +79,8 @@ namespace DispensingWorkOrderRecordTest
     WorkOrderCreationDateTime = DateTime.Now,
     Reference = new List<Reference>()
     {
-     new Reference() { ReferenceType = ReferenceTypes.PurchaseOrder, Value = "ICU812" },
-     new Reference() { ReferenceType = ReferenceTypes.Comment, Value = "The good snake oil this time!" },
+     new Reference() { ReferenceType = ReferenceTypes.PurchaseOrder, Value = "FF55500123" },
+     new Reference() { ReferenceType = ReferenceTypes.Comment, Value = "This is a sample comment!" },
     },
     PhysicalState = PhysicalStates.Liquid,
     RequestedArea = new ValueUnit() { Value = 1000, Uom = "ACR", Agency = AgencyTypes.UN_REC_20 },
@@ -153,7 +153,7 @@ namespace DispensingWorkOrderRecordTest
     {
      ShipTo = CreateStubParty("Adam's Back 40", true),
      Driver = CreateStubParty("Bob Bobson"),
-     OtherParty = new List<Party>() { CreateStubParty("Deputy Ray (Arresting Officer)", true) },
+     OtherParty = new List<Party>() { CreateStubParty("Ray's Fertilizer", true) },
     },
     WorkOrderIdentifier = new Identifier() { Number = "000123", Agency = AgencyTypes.AssignedByOriginator },
     WorkOrderCreationDateTime = DateTime.Now,
@@ -161,8 +161,8 @@ namespace DispensingWorkOrderRecordTest
     WorkRecordCreationDateTime = DateTime.Now,
     Reference = new List<Reference>()
     {
-     new Reference() { ReferenceType = ReferenceTypes.PurchaseOrder, Value = "ICU812" },
-     new Reference() { ReferenceType = ReferenceTypes.Comment, Value = "The good snake oil this time!" },
+     new Reference() { ReferenceType = ReferenceTypes.PurchaseOrder, Value = "FF55500123" },
+     new Reference() { ReferenceType = ReferenceTypes.Comment, Value = "This is a sample comment!" },
     },
     PhysicalState = PhysicalStates.Liquid,
     RequestedArea = new ValueUnit() { Value = 1000, Uom = "ACR", Agency = AgencyTypes.UN_REC_20 },
@@ -278,7 +278,7 @@ namespace DispensingWorkOrderRecordTest
       CountryCode = Country.Codes.FirstOrDefault(x => x.Value == "United States").Key,
      }
     };
-    party.Contact = new List<Contact>() { new Contact() { Name = "Adam", Phone = "(555) 555-5555", Email = "bogus@bogus.com" } };
+    party.Contact = new List<Contact>() { new Contact() { Name = "Adam", Phone = "(555) 555-5555", Email = "email@example.com" } };
    }
    return party;
   }
