@@ -41,8 +41,15 @@ namespace DispensingWorkMessage
   [DataMember(EmitDefaultValue = false)]
   public ValueUnit BatchAmount;
 
-  [DataMember(EmitDefaultValue = false)]
-  public PhysicalStates? PhysicalState;
+  [DataMember(EmitDefaultValue = false, Name = "PhysicalState")]
+  public string PhysicalStateString;
+
+  [IgnoreDataMember]
+  public PhysicalStates? PhysicalState
+  {
+   get => Enum.TryParse(PhysicalStateString, out PhysicalStates value) ? value : (PhysicalStates?)null;
+   set => PhysicalStateString = value?.ToString();
+  }
 
   [DataMember(EmitDefaultValue = false)]
   public ValueUnit RequestedArea;

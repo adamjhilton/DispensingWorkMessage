@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace DispensingWorkMessage
@@ -21,8 +22,15 @@ namespace DispensingWorkMessage
   [DataMember(EmitDefaultValue = false)]
   public string FileName;
 
-  [DataMember]
-  public DocumentTypes DocumentType;
+  [DataMember(Name = "DocumentType")]
+  public string DocumentTypeString;
+
+  [IgnoreDataMember]
+  public DocumentTypes? DocumentType
+  {
+   get => Enum.TryParse(DocumentTypeString, out DocumentTypes value) ? value : (DocumentTypes?)null;
+   set => DocumentTypeString = value?.ToString();
+  }
 
   /////////////////////////////////////////////////////////////////////////////////////////////
   #endregion

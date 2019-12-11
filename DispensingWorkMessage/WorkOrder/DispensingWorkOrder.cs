@@ -1,4 +1,5 @@
 using DispensingWorkMessage.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
@@ -24,8 +25,15 @@ namespace DispensingWorkMessage.WorkOrder
    set => base.ProductGroup = value;
   }
 
-  [DataMember]
-  public WorkOrderTypes WorkOrderType;
+  [DataMember(Name = "WorkOrderType")]
+  public string WorkOrderTypeString;
+
+  [IgnoreDataMember]
+  public WorkOrderTypes? WorkOrderType
+  {
+   get => Enum.TryParse(WorkOrderTypeString, out WorkOrderTypes value) ? value : (WorkOrderTypes?)null;
+   set => WorkOrderTypeString = value?.ToString();
+  }
 
   /////////////////////////////////////////////////////////////////////////////////////////////
   #endregion

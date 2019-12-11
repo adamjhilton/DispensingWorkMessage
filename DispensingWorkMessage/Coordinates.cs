@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace DispensingWorkMessage
@@ -9,8 +10,15 @@ namespace DispensingWorkMessage
   #region Serializable Properties
   /////////////////////////////////////////////////////////////////////////////////////////////
 
-  [DataMember]
-  public CoordinateTypes CoordinateType;
+  [DataMember(Name = "CoordinateType")]
+  public string CoordinateTypeString;
+
+  [IgnoreDataMember]
+  public CoordinateTypes? CoordinateType
+  {
+   get => Enum.TryParse(CoordinateTypeString, out CoordinateTypes value) ? value : (CoordinateTypes?)null;
+   set => CoordinateTypeString = value?.ToString();
+  }
 
   [DataMember]
   public List<Point> Point;

@@ -51,6 +51,7 @@
 
  public enum OrderStatuses
  {
+  Cancelled,
   Complete,
   InProgress,
  }
@@ -89,16 +90,33 @@
   ApplicationInstructions,
   BillingInstructions,
   BillOfLading,
+  Crop,
   Customs,
   Comment,
+  Farm,
+  Field,
   Invoice,
   Manifest,
   Order,
+  PlatCounty,
+  PlatTownShip,
+  PlatSection,
+  PriorCrop,
   PurchaseOrder,
   Release,
   SalesOrder,
   Transaction,
   Waybill,
+
+  NurseTruck,
+  ApplicationVehicle,
+  ApplicationMethod,
+  ApplicatorName,
+  CertificationNumber,
+  CertificationDate,
+  PesticideLicense,
+  PesticideLicenseDate,
+  TransferHeader,
  }
 
  public enum WorkOrderTypes

@@ -12,10 +12,10 @@ namespace DispensingWorkMessage
   [DataMember]
   public List<Identifier> Identifier;
 
-  [DataMember]
+  [DataMember(EmitDefaultValue = false)]
   public ValueUnit GrossWeight;
 
-  [DataMember]
+  [DataMember(EmitDefaultValue = false)]
   public ValueUnit TareWeight;
 
   /////////////////////////////////////////////////////////////////////////////////////////////

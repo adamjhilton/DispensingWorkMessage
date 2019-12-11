@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace DispensingWorkMessage
@@ -9,11 +10,18 @@ namespace DispensingWorkMessage
   #region Serializable Properties
   /////////////////////////////////////////////////////////////////////////////////////////////
 
-  [DataMember]
+  [DataMember(EmitDefaultValue = false)]
   public List<Identifier> Identifier;
 
-  [DataMember]
-  public CommentTypes CommentType;
+  [DataMember(Name = "CommentType")]
+  public string CommentTypeString;
+
+  [IgnoreDataMember]
+  public CommentTypes? CommentType
+  {
+   get => Enum.TryParse(CommentTypeString, out CommentTypes value) ? value : (CommentTypes?)null;
+   set => CommentTypeString = value?.ToString();
+  }
 
   [DataMember]
   public string Value;

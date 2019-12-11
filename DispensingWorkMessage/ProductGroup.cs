@@ -10,7 +10,7 @@ namespace DispensingWorkMessage
   #region Serializable Properties
   /////////////////////////////////////////////////////////////////////////////////////////////
 
-  [DataMember]
+  [DataMember(EmitDefaultValue = false)]
   public List<Identifier> Identifier;
 
   [DataMember(EmitDefaultValue = false)]

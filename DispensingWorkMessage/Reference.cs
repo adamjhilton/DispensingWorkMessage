@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 
 namespace DispensingWorkMessage
 {
@@ -8,8 +9,15 @@ namespace DispensingWorkMessage
   #region Serializable Properties
   /////////////////////////////////////////////////////////////////////////////////////////////
 
-  [DataMember]
-  public ReferenceTypes ReferenceType;
+  [DataMember(Name = "ReferenceType")]
+  public string ReferenceTypeString;
+
+  [IgnoreDataMember]
+  public ReferenceTypes? ReferenceType
+  {
+   get => Enum.TryParse(ReferenceTypeString, out ReferenceTypes value) ? value : (ReferenceTypes?)null;
+   set => ReferenceTypeString = value?.ToString();
+  }
 
   [DataMember]
   public string Value;

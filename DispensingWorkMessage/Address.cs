@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace DispensingWorkMessage
@@ -9,8 +10,15 @@ namespace DispensingWorkMessage
   #region Serializable Properties
   /////////////////////////////////////////////////////////////////////////////////////////////
 
-  [DataMember(EmitDefaultValue = false)]
-  public AddressTypes? AddressType;
+  [DataMember(EmitDefaultValue = false, Name = "AddressType")]
+  public string AddressTypeString;
+
+  [IgnoreDataMember]
+  public AddressTypes? AddressType
+  {
+   get => Enum.TryParse(AddressTypeString, out AddressTypes value) ? value : (AddressTypes?)null;
+   set => AddressTypeString = value?.ToString();
+  }
 
   [DataMember(EmitDefaultValue = false)]
   public List<string> AddressLine;

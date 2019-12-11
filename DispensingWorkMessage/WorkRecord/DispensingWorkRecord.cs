@@ -40,8 +40,15 @@ namespace DispensingWorkMessage.WorkRecord
   [DataMember(EmitDefaultValue = false)]
   public List<Location> ActualLocation;
 
-  [DataMember(EmitDefaultValue = false)]
-  public OrderStatuses OrderStatus;
+  [DataMember(EmitDefaultValue = false, Name = "OrderStatus")]
+  public string OrderStatusString;
+
+  [IgnoreDataMember]
+  public OrderStatuses? OrderStatus
+  {
+   get => Enum.TryParse(OrderStatusString, out OrderStatuses value) ? value : (OrderStatuses?)null;
+   set => OrderStatusString = value?.ToString();
+  }
 
   /////////////////////////////////////////////////////////////////////////////////////////////
   #endregion

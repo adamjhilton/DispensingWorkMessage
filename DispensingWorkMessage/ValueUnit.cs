@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 
 namespace DispensingWorkMessage
 {
@@ -14,8 +15,15 @@ namespace DispensingWorkMessage
   [DataMember]
   public string Uom;
 
-  [DataMember]
-  public AgencyTypes Agency;
+  [DataMember(Name = "Agency")]
+  public string AgencyString;
+
+  [IgnoreDataMember]
+  public AgencyTypes? Agency
+  {
+   get => Enum.TryParse(AgencyString, out AgencyTypes value) ? value : (AgencyTypes?)null;
+   set => AgencyString = value?.ToString();
+  }
 
   /////////////////////////////////////////////////////////////////////////////////////////////
   #endregion

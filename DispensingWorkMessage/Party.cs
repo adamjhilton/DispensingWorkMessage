@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace DispensingWorkMessage
@@ -12,8 +13,15 @@ namespace DispensingWorkMessage
   [DataMember]
   public List<Identifier> Identifier;
 
-  [DataMember(EmitDefaultValue = false)]
-  public PartyTypes? PartyType;
+  [DataMember(EmitDefaultValue = false, Name = "PartyType")]
+  public string PartyTypeString;
+
+  [IgnoreDataMember]
+  public PartyTypes? PartyType
+  {
+   get => Enum.TryParse(PartyTypeString, out PartyTypes value) ? value : (PartyTypes?)null;
+   set => PartyTypeString = value?.ToString();
+  }
 
   [DataMember(EmitDefaultValue = false)]
   public List<Address> Address;
