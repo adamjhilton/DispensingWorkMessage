@@ -3,7 +3,6 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
-using System.Windows;
 using System.Xml;
 
 namespace DispensingWorkMessage.Utilities
@@ -51,11 +50,11 @@ namespace DispensingWorkMessage.Utilities
    }
    catch (Exception e)
    {
-    MessageBox.Show(
-     $"Could not write to file '{fileName}'.\n\n{e.Message}",
-     "JSON Write Failure",
-     MessageBoxButton.OK,
-     MessageBoxImage.Error);
+    //MessageBox.Show(
+    // $"Could not write to file '{fileName}'.\n\n{e.Message}",
+    // "JSON Write Failure",
+    // MessageBoxButton.OK,
+    // MessageBoxImage.Error);
    }
   }
 
@@ -69,11 +68,11 @@ namespace DispensingWorkMessage.Utilities
     { return Deserialize<T>(File.ReadAllText(filePathAndName)); }
     catch (Exception e)
     {
-     MessageBox.Show(
-      $"Could not read to file '{Path.GetFileName(filePathAndName)}'.\n\n{e.Message}",
-      "JSON Write Failure",
-      MessageBoxButton.OK,
-      MessageBoxImage.Error);
+     //MessageBox.Show(
+     // $"Could not read to file '{Path.GetFileName(filePathAndName)}'.\n\n{e.Message}",
+     // "JSON Write Failure",
+     // MessageBoxButton.OK,
+     // MessageBoxImage.Error);
     }
    return default;
   }
